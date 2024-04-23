@@ -3,6 +3,8 @@ local awful_screen = require("awful.screen")
 local bling = require("module.bling")
 local rubato = require("module.rubato")
 
+local variables = require("configuration.variables")
+
 local anim_y = rubato.timed {
     easing = rubato.quadratic,
     intro = 0.1,
@@ -10,11 +12,11 @@ local anim_y = rubato.timed {
     awestore_compat = true
 }
 
-local ytm_scratchpad = bling.module.scratchpad {
-    command = "youtube-music",
-    rule = {
-        instance = "youtube music"
-    },
+local scratchpad = bling.module.scratchpad {
+    command = variables.apps.terminal,
+--    rule = {
+--        instance = "youtube music"
+--    },
     sticky = true,
     autoclose = true,
     floating = true,
@@ -25,14 +27,14 @@ local ytm_scratchpad = bling.module.scratchpad {
     }
 }
 
-function ytm_scratchpad:reapply_geometry()
+function scratchpad:reapply_geometry()
     local screen_geometry = awful_screen.focused().geometry
     local width = screen_geometry.width
     local height = screen_geometry.height
 
     local is_vertical = width < height
 
-    ytm_scratchpad.geometry = {
+    scratchpad.geometry = {
         x = width / (is_vertical and 50 or 7),
         y = height / 8 + screen_geometry.y,
         width = width * (is_vertical and 0.96 or 0.7),
@@ -40,4 +42,4 @@ function ytm_scratchpad:reapply_geometry()
     }
 end
 
-return ytm_scratchpad
+return scratchpad

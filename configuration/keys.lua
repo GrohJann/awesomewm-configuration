@@ -11,6 +11,7 @@ local variables = require("configuration.variables")
 
 local hotkeys_popup = require("ui.hotkeys_popup")
 local menu = require("ui.menu")
+local scratchpad = require("ui.scratchpad")
 
 
 local super = "Mod4"
@@ -171,14 +172,13 @@ awful.keyboard.append_global_keybindings({
 		description = "Open Private Browser",
 		group = "Apps",
 	}),
---TODO: add terminal scratchpad
---	awful.key({ super, shift }, "Return", function()
---		terminal_scratchpad:reapply_geometry()
---		terminal_scratchpad:toggle()
---	end, {
---		description = "Toggle Termianal Scratchpad",
---		group = "Awesome",
---	}),
+	awful.key({ super, shift }, "Return", function()
+		scratchpad:reapply_geometry()
+		scratchpad:toggle()
+	end, {
+		description = "Toggle Termianal Scratchpad",
+		group = "Awesome",
+	}),
 })
 
 
