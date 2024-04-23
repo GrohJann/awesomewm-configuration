@@ -14,7 +14,7 @@ return {
 
 	openWeather = {
 		-- OpenWeather api key
-		weather_api_key = "70ba53c5bc150dff7c438bc85045243a",
+		weather_api_key = "70ba53c5bc150dff7c438bc85045243a/1234",
 		latitude = 49.006,
 		longitude = 8.403,
 	},
