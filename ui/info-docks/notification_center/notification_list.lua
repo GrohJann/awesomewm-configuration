@@ -19,35 +19,17 @@ local list = wibox_widget {
 -- scrolling notifications list
 helpers.add_list_scrolling(list)
 
-function add_to_list(notification)
+local add_notifbox = function(notification)
     if #list.children == 1 and is_empty then
         list:reset()
         is_empty = false
     end
 
-    list:insert(1, notification_box(notification))
+    local new_notification = notification_box(notification)
+
+    list:insert(1, new_notification)
     all_notifications = list.children
-
     awesome.emit_signal("notifications::count", #all_notifications)
-end
-
-function clear_all_notifications()
-    list:reset()
-    list:insert(1, no_notifications)
-
-    all_notifications = {}
-    is_empty = true
-    awesome.emit_signal("notifications::count", 0)
-end
-
-function clear_notification(notification_widget)
-    if #list.children == 1 then
-        clear_all_notifications()
-    else
-        list:remove_widgets(notification_widget)
-        all_notifications = list.children
-        awesome.emit_signal("notifications::count", #all_notifications)
-    end
 end
 
 naughty.connect_signal(
@@ -59,13 +41,32 @@ naughty.connect_signal(
         notification:connect_signal(
             "destroyed", function(self, reason, keep_visble)
                 if reason == 1 then
-                    add_to_list(notification)
+                    add_notifbox(notification)
                 end
                 self.is_expired = true
             end
         )
     end
 )
+
+clear_all_notifications = function()
+    list:reset()
+    list:insert(1, no_notifications)
+
+    all_notifications = {}
+    is_empty = true
+    awesome.emit_signal("notifications::count", 0)
+end
+
+clear_notification = function(notification_widget)
+    if #list.children == 1 then
+        clear_all_notifications()
+    else
+        list:remove_widgets(notification_widget)
+        all_notifications = list.children
+        awesome.emit_signal("notifications::count", #all_notifications)
+    end
+end
 
 awesome.connect_signal(
     "notification_center::visible", function(visible)

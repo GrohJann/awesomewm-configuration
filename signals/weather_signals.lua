@@ -9,9 +9,9 @@ local variables = require("configuration.variables")
 local endpoint = "https://api.openweathermap.org/data/2.5/weather"
 
 local query_params = {
-    appid = variables.weather_api_key,
-    lat = variables.latitude,
-    lon = variables.longitude,
+    appid = variables.openWeather.weather_api_key,
+    lat = variables.openWeather.latitude,
+    lon = variables.openWeather.longitude,
     units = "metric",
     lang = "en"
 }

@@ -4,6 +4,8 @@ local gstring = require("gears.string")
 
 local helpers = require("helpers")
 
+local variables = require("configuration.variables")
+
 local function format_date(date_str, short)
     local year, month, day = date_str:match("(%d+)-(%d+)-(%d+)")
     local weekday = os.date(
@@ -54,8 +56,13 @@ local function calendar_event(event)
         event_date.text = format_date(event.start_date)
     end
 
-    local time_range = format_time(event.start_time) .. " - " .. format_time(event.end_time)
-    description.markup = "<b>" .. gstring.xml_escape(event.summary) .. "</b>\n" .. time_range
+    if variables.use_12_hour_clock then
+        local time_range = format_time(event.start_time) .. " - " .. format_time(event.end_time)
+        description.markup = "<b>" .. gstring.xml_escape(event.summary) .. "</b>\n" .. time_range
+    else
+        local time_range = event.start_time .. " - " .. event.end_time
+        description.markup = "<b>" .. gstring.xml_escape(event.summary) .. "</b>\n" .. time_range
+    end
 
     return wibox.widget {
         {

@@ -1,5 +1,6 @@
+require(... .. ".clients")
+require(... .. ".extras")
+require(... .. ".keys")
 require(... .. ".ruled")
 require(... .. ".tags")
-require(... .. ".clients")
 require(... .. ".wallpaper")
-require(... .. ".extras")

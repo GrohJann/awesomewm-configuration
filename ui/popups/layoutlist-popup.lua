@@ -41,6 +41,8 @@ local layout_popup = awful.popup {
 }
 
 -- Override default Mod4+Space and Mod4+Shift+Space keybindings
+-- TODO: Decide what to do with this
+/*
 awful.keygrabber {
     start_callback = function()
         awful.placement.centered(
@@ -76,3 +78,4 @@ awful.keygrabber {
         }
     }
 }
+*/

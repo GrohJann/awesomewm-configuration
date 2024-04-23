@@ -14,7 +14,7 @@ local function onclick()
                 pkill redshift & echo 'OFF'
             else
                 redshift -l %s:%s -t 6500:4200 &>/dev/null & echo 'ON'
-            fi ]], variables.latitude, variables.longitude
+            fi ]], variables.openWeather.latitude, variables.openWeather.longitude
         ), function(stdout)
             awesome.emit_signal(signal_label, stdout:match("ON") == "ON")
         end

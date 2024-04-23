@@ -190,6 +190,14 @@ theme.layoutlist_shape_border_color_selected = theme.focus
 theme.layoutlist_shape_selected = helpers.rrect(theme.border_radius / 2)
 
 -- Layout icons
+theme.layout_cornerne = icons_dir .. "layouts/cornerne.svg"
+theme.layout_cornernw = icons_dir .. "layouts/cornernw.svg"
+theme.layout_cornerse = icons_dir .. "layouts/cornerse.svg"
+theme.layout_cornersw = icons_dir .. "layouts/cornersw.svg"
+theme.layout_dwindle = icons_dir .. "layouts/dwindle.svg"
+
+-- TODO: sort and add the rest of the existing images
+-- TODO: make the missing images
 theme.layout_tile = icons_dir .. "layouts/tile.svg"
 theme.layout_tilebottom = icons_dir .. "layouts/tilebottom.svg"
 theme.layout_magnifier = icons_dir .. "layouts/magnifier.svg"
@@ -213,7 +221,7 @@ naughty.config.defaults.ontop = true
 naughty.config.defaults.title = "Generic Notification"
 
 naughty.config.icon_dirs = {
-    HOME .. "/.local/share/icons/Kuyen-icons/apps/48/", HOME .. "/.local/share/icons/Kuyen-icons/",
+    HOME .. "/usr/share/icons/kuyen-icon-theme/apps/48/", HOME .. "/usr/share/icons/kuyen-icon-theme/",
     "/usr/share/icons/Papirus-Dark/", "/usr/share/icons/Suru++-Asprómauros/",
     "/usr/share/icons/breeze-dark/", "/usr/share/pixmaps/"
 }
@@ -240,7 +248,7 @@ theme.bg_systray = theme.wibar_bg
 --- Bling ---
 -------------
 -- Playerctl
-theme.playerctl_ignore = {"qutebrowser", "chromium", "brave"}
+--theme.playerctl_ignore = {"qutebrowser", "chromium", "brave", "firefox"}
 theme.playerctl_player = {"youtube-music", "spotify", "mpd", "%any"}
 theme.playerctl_update_on_activity = true
 theme.playerctl_position_update_interval = 1

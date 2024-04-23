@@ -12,6 +12,6 @@ if variables.dominantcolors_path then
     require(... .. ".media_dominantcolors")
 end
 
-if variables.weather_api_key then
+if variables.openWeather.weather_api_key then
     require(... .. ".weather_signals")
 end

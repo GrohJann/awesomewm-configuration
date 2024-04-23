@@ -25,9 +25,9 @@ menu.main = awful.menu {
             end, icon_from_text("\u{eae7}")
         },
 
-        {"Terminal       Super+Enter", variables.terminal, icon_from_text("\u{eb8e}")},
+        {"Terminal       Super+Enter", variables.apps.terminal, icon_from_text("\u{eb8e}")},
 
-        {"Edit config", variables.editor .. " " .. awesome.conffile, icon_from_text("\u{e745}")},
+        {"Edit config", variables.apps.editor .. " " .. awesome.conffile, icon_from_text("\u{e745}")},
 
         {"Restart       Ctrl+Super+R", awesome.restart, icon_from_text("\u{f053}")},
 

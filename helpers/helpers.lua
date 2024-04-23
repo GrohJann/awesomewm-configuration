@@ -62,7 +62,7 @@ function _helpers.add_hover_cursor(w, hover_cursor)
         "mouse::enter", function()
             local w = mouse.current_wibox
             if w then
-                w.cursor = hover_cursor or "hand1"
+                w.cursor = hover_cursor or "hand2"
             end
         end
     )

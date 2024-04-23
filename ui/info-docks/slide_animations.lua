@@ -19,7 +19,7 @@ local function show()
     animation.slide_in(reserved_height, slide_calendar, calendar_popup)
     reserved_height = reserved_height + calendar_popup.height + 12
 
-    if variables.weather_api_key then
+    if variables.openWeather.weather_api_key then
         animation.slide_in(reserved_height, slide_weather, weather_popup)
         reserved_height = reserved_height + weather_popup.height + 12
     end
@@ -32,7 +32,7 @@ local function hide()
     animation.slide_out(slide_calendar, calendar_popup)
     animation.slide_out(slide_notif_center, notification_center)
 
-    if variables.weather_api_key then
+    if variables.openWeather.weather_api_key then
         animation.slide_out(slide_weather, weather_popup)
     end
 end
