@@ -26,20 +26,6 @@ beautiful.init(gfs.get_configuration_dir() .. "theme/theme.lua")
 require("configuration")
 
 
--- Set Wallpapers
---require("dynamic-multi-screen")
-local awful_screen = require("awful.screen")
-local bling = require("module/bling")
-
-awful_screen.connect_for_each_screen(function(s)
-    bling.module.wallpaper.setup {
-        wallpaper = os.getenv("HOME") .. "/Pictures/Wallpapers/110014443_p0 2560x1440.png",
-        position = "fit",
-        screen = s,
-    }
-end)
-
-
 -- Import UI + Signals
 require("ui")
 require("signals")

@@ -34,8 +34,12 @@ theme.light_white = xrdb.color15
 -- Extra colors and aliases
 theme.transparent = "#00000000"
 
-theme.moon = "#f5eb94"
-theme.uranus = "#f5d1a3"
+-- TODO: if colors work then cull unessary variables
+--theme.moon = "#f5eb94"
+theme.moon = theme.yellow
+--theme.uranus = "#f5d1a3"
+theme.uranus = theme.red
+-- TODO: replace with xrdb colors
 theme.pluto = "#fabdd4"
 theme.chibimoon = "#efa3ce"
 
@@ -136,6 +140,34 @@ theme.taglist_fg_empty = theme.xbackground
 
 theme.taglist_bg_volatile = theme.jupiter
 
+
+-- copy from new
+--[[ [[]]
+theme.taglist_bg = theme.bg --.. "00"
+theme.taglist_bg_focus = theme.blue
+theme.taglist_fg_focus = theme.fg
+theme.taglist_bg_urgent = theme.red
+theme.taglist_fg_urgent = theme.fg
+--theme.taglist_bg_occupied = colors.fg3 .. "33"
+theme.taglist_bg_occupied = theme.light_white
+theme.taglist_fg_occupied = theme.fg
+--theme.taglist_bg_empty = colors.fg3 .. "33"
+theme.taglist_bg_empty = theme.light_black
+--theme.taglist_fg_empty = colors.fg
+--theme.taglist_disable_icon = true
+--[[]]
+--[[
+theme.taglist_bg = theme.bg --.. "00"
+theme.taglist_bg_focus = "#7c98e4"
+theme.taglist_fg_focus = "#f5e0dc"
+theme.taglist_bg_urgent = "#e56e70"
+theme.taglist_fg_urgent = "#f5e0dc"
+theme.taglist_bg_occupied = "#161623" --.. "33"
+theme.taglist_fg_occupied = "#f5e0dc"
+theme.taglist_bg_empty = "#b5bfe2" .. "33"
+theme.taglist_fg_empty = "#f5e0dc"
+--[[]]
+
 -- Mainmenu
 theme.menu_font = theme.font_name .. "Medium 10"
 theme.menu_height = dpi(36)
@@ -199,6 +231,7 @@ theme.layout_dwindle = icons_dir .. "layouts/dwindle.svg"
 -- TODO: sort and add the rest of the existing images
 -- TODO: make the missing images
 theme.layout_tile = icons_dir .. "layouts/tile.svg"
+theme.layout_tileleft = icons_dir .. "layouts/tileleft.svg"
 theme.layout_tilebottom = icons_dir .. "layouts/tilebottom.svg"
 theme.layout_magnifier = icons_dir .. "layouts/magnifier.svg"
 theme.layout_max = icons_dir .. "layouts/max.svg"

@@ -1,9 +1,22 @@
 local beautiful = require("beautiful")
 local variables = require("configuration.variables")
 
+local awful_screen = require("awful.screen")
+local bling = require("module/bling")
+
 -- Set static wallpaper if there is no video wallpaper path
 if not variables.videowallpaper_path then
-    screen.connect_signal(
+	-- Set Wallpapers
+	awful_screen.connect_for_each_screen(function(s)
+		bling.module.wallpaper.setup({
+			--wallpaper = os.getenv("HOME") .. "/Pictures/Wallpapers/110014443_p0 2560x1440.png",
+			wallpaper = os.getenv("HOME") .. "/Pictures/Wallpapers/wallpaper1.png",
+			position = "fit",
+			screen = s,
+		})
+	end)
+
+	--[[    screen.connect_signal(
         "request::wallpaper", function(s)
             local awful_wallpaper = require("awful.wallpaper")
 
@@ -12,8 +25,8 @@ if not variables.videowallpaper_path then
                 bg = beautiful.black
             }
         end
-    )
-    return
+    )--]]
+	return
 end
 
 local away_wallpaper = require("away.wallpaper")
@@ -24,48 +37,46 @@ local gtimer = require("gears.timer")
 -- Remove any previous xwinwrap processes
 spawn("pkill xwinwrap")
 
-screen.connect_signal(
-    "request::wallpaper", function(s)
-        if s.videowallpaper then
-            s.videowallpaper.update()
-            return
-        end
+screen.connect_signal("request::wallpaper", function(s)
+	if s.videowallpaper then
+		s.videowallpaper.update()
+		return
+	end
 
-        local vertical_screen = s.geometry.height > s.geometry.width
-        local filepath = (vertical_screen and variables.videowallpaper_vertical_path
-                             or variables.videowallpaper_path)
+	local vertical_screen = s.geometry.height > s.geometry.width
+	local filepath = (vertical_screen and variables.videowallpaper_vertical_path or variables.videowallpaper_path)
 
-        s.videowallpaper = away_wallpaper.get_videowallpaper(
-            s, {
-                id = "video test",
-                path = filepath,
-                player = "mpv",
-                xargs = {"-b", "-ov", "-ni", "-s"},
-                pargs = {
-                    "-wid WID", "--no-stop-screensaver", "--loop", "--no-audio", "--hwdec=auto",
-                    "--really-quiet", "--player-operation-mode=cplayer"
-                }
-            }
-        )
-    end
-)
+	s.videowallpaper = away_wallpaper.get_videowallpaper(s, {
+		id = "video test",
+		path = filepath,
+		player = "mpv",
+		xargs = { "-b", "-ov", "-ni", "-s" },
+		pargs = {
+			"-wid WID",
+			"--no-stop-screensaver",
+			"--loop",
+			"--no-audio",
+			"--hwdec=auto",
+			"--really-quiet",
+			"--player-operation-mode=cplayer",
+		},
+	})
+end)
 
-screen.connect_signal(
-    "removed", function(s)
-        if s.videowallpaper and s.videowallpaper.pid then
-            spawn("kill " .. s.videowallpaper.pid)
-        end
-    end
-)
+screen.connect_signal("removed", function(s)
+	if s.videowallpaper and s.videowallpaper.pid then
+		spawn("kill " .. s.videowallpaper.pid)
+	end
+end)
 
 -- Wait 4 seconds for the wallpaper to be set before loading video pausing helpers
-gtimer {
-    timeout = 4,
-    autostart = true,
-    single_shot = true,
-    callback = function()
-        if screen[1].videowallpaper.pid then
-            require("helpers.video_pausing_helpers")
-        end
-    end
-}
+gtimer({
+	timeout = 4,
+	autostart = true,
+	single_shot = true,
+	callback = function()
+		if screen[1].videowallpaper.pid then
+			require("helpers.video_pausing_helpers")
+		end
+	end,
+})

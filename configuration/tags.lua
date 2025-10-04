@@ -8,6 +8,7 @@ tag.connect_signal(
     "request::default_layouts", function()
         awful_layout.append_default_layouts {
         awful_layout.suit.tile,
+        awful_layout.suit.tile.left,
 		bling_layout.equalarea,
 		awful_layout.suit.spiral.dwindle,
 		awful_layout.suit.floating,
@@ -18,7 +19,7 @@ tag.connect_signal(
 -- Screen Padding and Tags
 screen.connect_signal(
     "request::desktop_decoration", function(s)
-        awful_tag({"1", "2", "3", "4", "5", "6", "7", "8", "9"}, s, awful_layout.layouts[1])
+        awful_tag({"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}, s, awful_layout.layouts[1])
 
         local is_vertical = s.geometry.height > s.geometry.width
         if is_vertical then

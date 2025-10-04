@@ -13,12 +13,10 @@ local hotkeys_popup = require("ui.hotkeys_popup")
 local menu = require("ui.menu")
 local scratchpad = require("ui.scratchpad")
 
-
 local super = "Mod4"
 local alt = "Mod1"
 local ctrl = "Control"
 local shift = "Shift"
-
 
 -- Awesome stuff
 awful.keyboard.append_global_keybindings({
@@ -44,14 +42,14 @@ awful.keyboard.append_global_keybindings({
 		description = "Lock Screen",
 		group = "Awesome",
 	}),
-    --TODO: figure out why this does nothing
-    awful.key({}, "XF86PowerOff", function()
+	--TODO: figure out why this does nothing
+	awful.key({}, "XF86PowerOff", function()
 		awesome.emit_signal("exit_screen::show")
 	end, {
 		description = "show exit screen",
 		group = "Awesome",
 	}),
-    awful.key({ super }, "n", function()
+	awful.key({ super }, "n", function()
 		awesome.emit_signal("notification_center::toggle")
 	end, {
 		description = "toggle notifcation center",
@@ -67,7 +65,7 @@ awful.keyboard.append_global_keybindings({
 		description = "toggle control center",
 		group = "Awesome",
 	}),
-    awful.key({ super }, "Tab", revelation, {
+	awful.key({ super }, "Tab", revelation, {
 		description = "use revelation",
 		group = "Awesome",
 	}),
@@ -83,7 +81,7 @@ awful.keyboard.append_global_keybindings({
 		description = "Open Copy History",
 		group = "Awesome",
 	}),
-    -- TODO: check if this works
+	-- TODO: check if this works
 	awful.key({ super, shift }, "n", function()
 		if not naughty.suspended then
 			naughty.destroy_all_notifications()
@@ -103,7 +101,7 @@ awful.keyboard.append_global_keybindings({
 		description = "Collect Garbarge",
 		group = "Awesome",
 	}),
-    awful.key({ super }, "m", function()
+	awful.key({ super, shift }, "m", function()
 		awful.spawn.easy_async_with_shell("autorandr --cycle", function(stdout)
 			naughty.notification({
 				text = stdout,
@@ -115,30 +113,27 @@ awful.keyboard.append_global_keybindings({
 	}),
 })
 
-
 -- Screenshots
 awful.keyboard.append_global_keybindings({
-    awful.key({}, "Print", function()
-        awful.spawn("flameshot gui")
-    end, {
-        description = "Take an Area Screenshot",
-        group = "Screenshots",
-    }),
-    awful.key({ super, shift }, "s", function()
-        awful.spawn("flameshot gui")
-    end, {
-        description = "Take an Area Screenshot",
-        group = "Screenshots",
-    }),
-    awful.key({ alt }, "Print", function()
-        awful.spawn("flameshot full")
-    end, {
-        description = "Take a Full Screenshot",
-        group = "Screenshots",
-    }),
+	awful.key({}, "Print", function()
+		awful.spawn("flameshot gui")
+	end, {
+		description = "Take an Area Screenshot",
+		group = "Screenshots",
+	}),
+	awful.key({ super, shift }, "s", function()
+		awful.spawn("flameshot gui")
+	end, {
+		description = "Take an Area Screenshot",
+		group = "Screenshots",
+	}),
+	awful.key({ alt }, "Print", function()
+		awful.spawn("flameshot full")
+	end, {
+		description = "Take a Full Screenshot",
+		group = "Screenshots",
+	}),
 })
-
-
 
 -- Apps
 awful.keyboard.append_global_keybindings({
@@ -180,7 +175,6 @@ awful.keyboard.append_global_keybindings({
 		group = "Awesome",
 	}),
 })
-
 
 -- Client Bindings
 awful.keyboard.append_global_keybindings({
@@ -255,7 +249,6 @@ awful.keyboard.append_global_keybindings({
 	}),
 })
 
-
 -- Hotkeys
 awful.keyboard.append_global_keybindings({
 	-- Brightness Control
@@ -314,8 +307,7 @@ awful.keyboard.append_global_keybindings({
 		group = "Hotkeys",
 	}),
 })
-	
-	
+
 -- Screen
 awful.keyboard.append_global_keybindings({
 	awful.key({ super }, "]", function()
@@ -330,9 +322,8 @@ awful.keyboard.append_global_keybindings({
 		description = "Focus the previous Screen",
 		group = "Screen",
 	}),
-})	
-	
-    
+})
+
 -- Layout
 awful.keyboard.append_global_keybindings({
 	awful.key({ super, ctrl }, "k", function()
@@ -360,7 +351,6 @@ awful.keyboard.append_global_keybindings({
 		group = "Layout",
 	}),
 })
-
 
 -- Tags
 awful.keyboard.append_global_keybindings({
@@ -427,147 +417,115 @@ awful.keyboard.append_global_keybindings({
 	}),
 })
 
-
 -- Client management keybinds
-client.connect_signal(
-    "request::default_keybindings", function()
-        awful.keyboard.append_client_keybindings {
-            awful.key(
-                {super, ctrl}, "Up", function(c)
-                    c.fullscreen = not c.fullscreen
-                    c:raise()
-                end, {
-                    description = "toggle fullscreen",
-                    group = "Client"
-                }
-            ), awful.key(
-                {super, shift}, "a", function(c)
-                    c.ontop = not c.ontop
-                end, {
-                    description = "toggle ontop",
-                    group = "Client"
-                }
-            ), awful.key(
-                {super, ctrl}, "a", function(c)
-                    c.sticky = not c.sticky
-                end, {
-                    description = "toggle sticky",
-                    group = "Client"
-                }
-            ), awful.key(
-                {super}, "f", awful.client.floating.toggle, {
-                    description = "toggle floating",
-                    group = "Client"
-                }
-            ), awful.key(
-                {super, ctrl}, "Down", function(c)
-                    -- The client currently has the input focus, so it cannot be
-                    -- minimized, since minimized clients can"t have the focus.
-                    c.minimized = true
-                end, {
-                    description = "minimize",
-                    group = "Client"
-                }
-            ), awful.key(
-                {super}, "m", function(c)
-                    c.maximized = not c.maximized
-                    c:raise()
-                end, {
-                    description = "toggle maximize",
-                    group = "Client"
-                }
-            ), awful.key(
-                {super}, "x", function(c)
-                    c:kill()
-                end, {
-                    description = "close window",
-                    group = "Client"
-                }
-            ), awful.key(
-                {alt}, "F4", function(c)
-                    c:kill()
-                end, {
-                    description = "close window",
-                    group = "Client"
-                }
-            ), -- Single tap: Center client. Double tap: Center client + Floating + Resize
-            awful.key(
-                {super}, "c", function(c)
-                    awful.placement.centered(
-                        c, {
-                            honor_workarea = true,
-                            honor_padding = true
-                        }
-                    )
-                    helpers.single_double_tap(
-                        nil, function()
-                            local focused_screen_geometry = awful.screen.focused().geometry
-                            helpers.float_and_resize(
-                                c, focused_screen_geometry.width * 0.5,
-                                    focused_screen_geometry.height * 0.5
-                            )
-                        end
-                    )
-                end, {
-                    description = "center client",
-                    group = "Client"
-                }
-            ), awful.key(
-                {super, shift}, "Return", function(c)
-                    c:swap(awful.client.getmaster())
-                end, {
-                    description = "move to master",
-                    group = "Client"
-                }
-            ), awful.key(
-                {super, shift}, "]", function(c)
-                    move_client_to_screen(c, "right")
-                end, {
-                    description = "move client to next screen",
-                    group = "Client"
-                }
-            ), awful.key(
-                {super, shift}, "[", function(c)
-                    move_client_to_screen(c, "left")
-                end, {
-                    description = "move client to previous screen",
-                    group = "Client"
-                }
-            )
-        }
-    end
-)
-
+client.connect_signal("request::default_keybindings", function()
+	awful.keyboard.append_client_keybindings({
+		awful.key({ super, ctrl }, "Up", function(c)
+			c.fullscreen = not c.fullscreen
+			c:raise()
+		end, {
+			description = "toggle fullscreen",
+			group = "Client",
+		}),
+		awful.key({ super, shift }, "a", function(c)
+			c.ontop = not c.ontop
+		end, {
+			description = "toggle ontop",
+			group = "Client",
+		}),
+		awful.key({ super, ctrl }, "a", function(c)
+			c.sticky = not c.sticky
+		end, {
+			description = "toggle sticky",
+			group = "Client",
+		}),
+		awful.key({ super }, "f", awful.client.floating.toggle, {
+			description = "toggle floating",
+			group = "Client",
+		}),
+		awful.key({ super, ctrl }, "Down", function(c)
+			-- The client currently has the input focus, so it cannot be
+			-- minimized, since minimized clients can"t have the focus.
+			c.minimized = true
+		end, {
+			description = "minimize",
+			group = "Client",
+		}),
+		awful.key({ super }, "m", function(c)
+			c.maximized = not c.maximized
+			c:raise()
+		end, {
+			description = "toggle maximize",
+			group = "Client",
+		}),
+		awful.key({ super }, "x", function(c)
+			c:kill()
+		end, {
+			description = "close window",
+			group = "Client",
+		}),
+		awful.key({ alt }, "F4", function(c)
+			c:kill()
+		end, {
+			description = "close window",
+			group = "Client",
+		}), -- Single tap: Center client. Double tap: Center client + Floating + Resize
+		awful.key({ super }, "c", function(c)
+			awful.placement.centered(c, {
+				honor_workarea = true,
+				honor_padding = true,
+			})
+			helpers.single_double_tap(nil, function()
+				local focused_screen_geometry = awful.screen.focused().geometry
+				helpers.float_and_resize(c, focused_screen_geometry.width * 0.5, focused_screen_geometry.height * 0.5)
+			end)
+		end, {
+			description = "center client",
+			group = "Client",
+		}),
+		awful.key({ super, shift }, "Return", function(c)
+			c:swap(awful.client.getmaster())
+		end, {
+			description = "move to master",
+			group = "Client",
+		}),
+		awful.key({ super, shift }, "]", function(c)
+			move_client_to_screen(c, "right")
+		end, {
+			description = "move client to next screen",
+			group = "Client",
+		}),
+		awful.key({ super, shift }, "[", function(c)
+			move_client_to_screen(c, "left")
+		end, {
+			description = "move client to previous screen",
+			group = "Client",
+		}),
+	})
+end)
 
 -- Mouse buttons on the client
-client.connect_signal(
-    "request::default_mousebindings", function()
-        awful.mouse.append_client_mousebindings {
-            awful.button(
-                {}, 1, function(c)
-                    c:activate{
-                        context = "mouse_click"
-                    }
-                end
-            ), awful.button(
-                {super}, 1, function(c)
-                    c:activate{
-                        context = "mouse_click",
-                        action = "mouse_move"
-                    }
-                end
-            ), awful.button(
-                {super}, 3, function(c)
-                    c:activate{
-                        context = "mouse_click",
-                        action = "mouse_resize"
-                    }
-                end
-            )
-        }
-    end
-)
-
+client.connect_signal("request::default_mousebindings", function()
+	awful.mouse.append_client_mousebindings({
+		awful.button({}, 1, function(c)
+			c:activate({
+				context = "mouse_click",
+			})
+		end),
+		awful.button({ super }, 1, function(c)
+			c:activate({
+				context = "mouse_click",
+				action = "mouse_move",
+			})
+		end),
+		awful.button({ super }, 3, function(c)
+			c:activate({
+				context = "mouse_click",
+				action = "mouse_resize",
+			})
+		end),
+	})
+end)
 
 -- Mouse bindings on desktop
 awful.mouse.append_global_mousebindings({
@@ -575,7 +533,7 @@ awful.mouse.append_global_mousebindings({
 	awful.button({}, 1, function()
 		naughty.destroy_all_notifications()
 		menu.main:hide()
-	end), 
+	end),
 	-- Right click
 	awful.button({}, 3, function()
 		menu.main:toggle()
@@ -584,11 +542,7 @@ awful.mouse.append_global_mousebindings({
 	awful.button({ super }, 5, awful.tag.viewnext),
 })
 
-
-
-
-
--- TODO: implement this    
+-- TODO: implement this
 --[[	awful.key({ super }, "t", function(c)
 		awful.titlebar.toggle(c, "top")
 	end, {
@@ -604,3 +558,4 @@ awful.mouse.append_global_mousebindings({
 		description = "Toggle all Titlebars in Workspace",
 		group = "Client",
 	}),[[]]
+
